@@ -9,6 +9,7 @@ import AlumniTypesContent from "@/components/dashboard/AlumniTypes";
 import SubmissionProcess from "@/components/dashboard/SubmissionProcess";
 import AlumniSubmissionProcess from "@/components/dashboard/AlumniSubmissionProcess";
 import LoadingState from "@/components/dashboard/LoadingState";
+import RecentNotifications from "@/components/dashboard/RecentNotifications";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -37,6 +38,8 @@ const Dashboard = () => {
         <LoadingState />
       ) : (
         <>
+          <RecentNotifications />
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <RequestSummary
               title="Barrier Requests"
