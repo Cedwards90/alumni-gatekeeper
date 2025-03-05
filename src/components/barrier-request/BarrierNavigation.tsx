@@ -1,6 +1,7 @@
 
 import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ChevronLeft, Check } from "lucide-react";
+import { useBarrierForm } from "@/contexts/BarrierFormContext";
 
 interface BarrierNavigationProps {
   currentStep: number;
@@ -9,8 +10,17 @@ interface BarrierNavigationProps {
   handleSubmit: () => void;
 }
 
-const BarrierNavigation = ({ currentStep, handlePrevious, handleNext, handleSubmit }: BarrierNavigationProps) => {
+const BarrierNavigation = ({ 
+  currentStep, 
+  handlePrevious, 
+  handleNext, 
+  handleSubmit 
+}: BarrierNavigationProps) => {
+  const { hasFormErrors } = useBarrierForm();
+  
   if (currentStep >= 5) return null;
+  
+  const isCurrentStepValid = !hasFormErrors(currentStep);
   
   return (
     <div className="flex justify-between mt-8">
@@ -18,13 +28,19 @@ const BarrierNavigation = ({ currentStep, handlePrevious, handleNext, handleSubm
         variant="outline"
         onClick={handlePrevious}
         disabled={currentStep === 1}
+        className="gap-2"
       >
+        <ChevronLeft size={16} />
         Previous
       </Button>
       
       {currentStep < 4 ? (
         <Button
-          className="bg-evolve-600 hover:bg-evolve-700 transition-all-smooth"
+          className={`transition-all duration-300 ${
+            isCurrentStepValid 
+              ? "bg-evolve-600 hover:bg-evolve-700" 
+              : "bg-evolve-400"
+          }`}
           onClick={handleNext}
         >
           Next Step
@@ -32,9 +48,10 @@ const BarrierNavigation = ({ currentStep, handlePrevious, handleNext, handleSubm
         </Button>
       ) : (
         <Button
-          className="bg-evolve-600 hover:bg-evolve-700 transition-all-smooth"
+          className="bg-evolve-600 hover:bg-evolve-700 transition-all duration-300"
           onClick={handleSubmit}
         >
+          <Check size={16} className="mr-1" />
           Submit Request
         </Button>
       )}

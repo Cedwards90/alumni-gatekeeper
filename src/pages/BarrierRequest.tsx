@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -15,12 +15,31 @@ import Step3RequestForm from "@/components/barrier-request/steps/Step3RequestFor
 import Step4Review from "@/components/barrier-request/steps/Step4Review";
 import Step5Tracking from "@/components/barrier-request/steps/Step5Tracking";
 
-const BarrierRequest = () => {
+// Context
+import { BarrierFormProvider, useBarrierForm } from "@/contexts/BarrierFormContext";
+
+const BarrierRequestContent = () => {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(1);
-  const [barrierType, setBarrierType] = useState<string | null>(null);
+  const [currentStep, setCurrentStep] = useState(() => {
+    const savedStep = localStorage.getItem("barrierCurrentStep");
+    return savedStep ? parseInt(savedStep) : 1;
+  });
+  
+  const { formData, hasFormErrors, getFormErrors, resetForm } = useBarrierForm();
+
+  // Save current step to localStorage
+  useEffect(() => {
+    localStorage.setItem("barrierCurrentStep", currentStep.toString());
+  }, [currentStep]);
 
   const handleNext = () => {
+    // Validate the current step before proceeding
+    if (hasFormErrors(currentStep)) {
+      const errors = getFormErrors(currentStep);
+      errors.forEach(error => toast.error(error));
+      return;
+    }
+
     if (currentStep < 5) {
       setCurrentStep(currentStep + 1);
       window.scrollTo(0, 0);
@@ -35,8 +54,17 @@ const BarrierRequest = () => {
   };
 
   const handleSubmit = () => {
+    // Submit form data here...
     toast.success("Your barrier request has been submitted successfully!");
-    navigate("/dashboard");
+    
+    // Reset form data and step
+    resetForm();
+    localStorage.removeItem("barrierCurrentStep");
+    
+    // Navigate to dashboard with a short delay to allow the toast to be seen
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 1500);
   };
 
   return (
@@ -54,19 +82,39 @@ const BarrierRequest = () => {
 
         <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 mb-8">
           {/* Step 1: Account Information */}
-          {currentStep === 1 && <Step1Account />}
+          {currentStep === 1 && (
+            <div className="animate-fade-in">
+              <Step1Account />
+            </div>
+          )}
 
           {/* Step 2: Eligibility Information */}
-          {currentStep === 2 && <Step2Eligibility />}
+          {currentStep === 2 && (
+            <div className="animate-fade-in">
+              <Step2Eligibility />
+            </div>
+          )}
 
           {/* Step 3: Request Form */}
-          {currentStep === 3 && <Step3RequestForm barrierType={barrierType} setBarrierType={setBarrierType} />}
+          {currentStep === 3 && (
+            <div className="animate-fade-in">
+              <Step3RequestForm />
+            </div>
+          )}
 
           {/* Step 4: Review & Processing */}
-          {currentStep === 4 && <Step4Review barrierType={barrierType} />}
+          {currentStep === 4 && (
+            <div className="animate-fade-in">
+              <Step4Review />
+            </div>
+          )}
 
           {/* Step 5: Status Tracking */}
-          {currentStep === 5 && <Step5Tracking />}
+          {currentStep === 5 && (
+            <div className="animate-fade-in">
+              <Step5Tracking />
+            </div>
+          )}
 
           {/* Navigation Buttons */}
           <BarrierNavigation 
@@ -78,6 +126,15 @@ const BarrierRequest = () => {
         </div>
       </main>
     </div>
+  );
+};
+
+// Wrap the component with the context provider
+const BarrierRequest = () => {
+  return (
+    <BarrierFormProvider>
+      <BarrierRequestContent />
+    </BarrierFormProvider>
   );
 };
 

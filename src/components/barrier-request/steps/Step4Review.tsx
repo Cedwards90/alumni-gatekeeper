@@ -1,12 +1,17 @@
 
 import React from "react";
 import { Clock, FileText, CheckCircle2 } from "lucide-react";
+import { useBarrierForm } from "@/contexts/BarrierFormContext";
 
-interface Step4ReviewProps {
-  barrierType: string | null;
-}
+const Step4Review = () => {
+  const { formData } = useBarrierForm();
+  const { barrierType, description, fileNames } = formData;
 
-const Step4Review = ({ barrierType }: Step4ReviewProps) => {
+  const formatBarrierType = (type: string | null) => {
+    if (!type) return "Not selected";
+    return type.charAt(0).toUpperCase() + type.slice(1);
+  };
+
   return (
     <div className="animate-fade-in">
       <h3 className="text-lg font-medium mb-4">Step 4: Review & Processing</h3>
@@ -18,7 +23,7 @@ const Step4Review = ({ barrierType }: Step4ReviewProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <p className="text-sm text-gray-500">Barrier Type</p>
-              <p className="font-medium">{barrierType ? barrierType.charAt(0).toUpperCase() + barrierType.slice(1) : "Not selected"}</p>
+              <p className="font-medium">{formatBarrierType(barrierType)}</p>
             </div>
             <div>
               <p className="text-sm text-gray-500">Submission Date</p>
@@ -28,12 +33,23 @@ const Step4Review = ({ barrierType }: Step4ReviewProps) => {
           
           <div>
             <p className="text-sm text-gray-500">Description</p>
-            <p className="font-medium">Sample description of the barrier request.</p>
+            <p className="font-medium">{description || "No description provided"}</p>
           </div>
           
           <div>
             <p className="text-sm text-gray-500">Supporting Documents</p>
-            <p className="font-medium">None attached</p>
+            {fileNames.length > 0 ? (
+              <div className="mt-2 space-y-1">
+                {fileNames.map((fileName, index) => (
+                  <div key={index} className="flex items-center gap-2">
+                    <FileText size={16} className="text-evolve-600" />
+                    <span className="text-sm">{fileName}</span>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="font-medium">None attached</p>
+            )}
           </div>
         </div>
       </div>
