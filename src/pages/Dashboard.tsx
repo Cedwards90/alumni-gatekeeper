@@ -13,7 +13,9 @@ import {
   Heart,
   HelpCircle,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  FileText,
+  PlusCircle
 } from "lucide-react";
 
 const Dashboard = () => {
@@ -34,6 +36,10 @@ const Dashboard = () => {
     // In a real app, you would call a sign out API here
     toast.success("Signed out successfully");
     navigate("/sign-in");
+  };
+
+  const handleNewBarrierRequest = () => {
+    navigate("/barrier-request");
   };
 
   const barrierTypes = [
@@ -117,9 +123,19 @@ const Dashboard = () => {
                   <p className="text-2xl font-semibold text-evolve-600">0</p>
                   <p className="text-sm text-muted-foreground">Active requests</p>
                 </div>
-                <Button className="w-full mt-4 bg-evolve-600 hover:bg-evolve-700">
-                  View Requests
-                </Button>
+                <div className="grid grid-cols-2 gap-3 mt-4">
+                  <Button className="bg-evolve-600 hover:bg-evolve-700">
+                    View Requests
+                  </Button>
+                  <Button 
+                    className="flex items-center gap-1" 
+                    variant="outline"
+                    onClick={handleNewBarrierRequest}
+                  >
+                    <PlusCircle size={16} />
+                    New Request
+                  </Button>
+                </div>
               </div>
 
               <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 transition-all hover:shadow-md">
@@ -129,9 +145,18 @@ const Dashboard = () => {
                   <p className="text-2xl font-semibold text-evolve-600">0</p>
                   <p className="text-sm text-muted-foreground">Active requests</p>
                 </div>
-                <Button className="w-full mt-4 bg-evolve-600 hover:bg-evolve-700">
-                  View Requests
-                </Button>
+                <div className="grid grid-cols-2 gap-3 mt-4">
+                  <Button className="bg-evolve-600 hover:bg-evolve-700">
+                    View Requests
+                  </Button>
+                  <Button 
+                    className="flex items-center gap-1" 
+                    variant="outline"
+                  >
+                    <PlusCircle size={16} />
+                    New Request
+                  </Button>
+                </div>
               </div>
             </div>
 
@@ -187,6 +212,25 @@ const Dashboard = () => {
                   </div>
                 </div>
               )}
+            </div>
+
+            <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
+              <div className="flex items-start gap-3">
+                <FileText className="text-evolve-600 shrink-0" />
+                <div>
+                  <h3 className="text-lg font-medium mb-2">Barrier Request Submission Process</h3>
+                  <p className="text-muted-foreground mb-4">
+                    Need assistance with your training program? Submit a barrier request to get help with transportation, 
+                    childcare, emergency funds, educational support, or health & wellness needs.
+                  </p>
+                  <Button 
+                    className="bg-evolve-600 hover:bg-evolve-700"
+                    onClick={handleNewBarrierRequest}
+                  >
+                    Start New Request
+                  </Button>
+                </div>
+              </div>
             </div>
           </>
         )}
