@@ -7,6 +7,7 @@ import CollapsibleInfo from "@/components/dashboard/CollapsibleInfo";
 import BarrierTypesContent from "@/components/dashboard/BarrierTypes";
 import AlumniTypesContent from "@/components/dashboard/AlumniTypes";
 import SubmissionProcess from "@/components/dashboard/SubmissionProcess";
+import AlumniSubmissionProcess from "@/components/dashboard/AlumniSubmissionProcess";
 import LoadingState from "@/components/dashboard/LoadingState";
 
 const Dashboard = () => {
@@ -24,6 +25,10 @@ const Dashboard = () => {
 
   const handleNewBarrierRequest = () => {
     navigate("/barrier-request");
+  };
+
+  const handleNewAlumniRequest = () => {
+    navigate("/alumni-request");
   };
 
   return (
@@ -44,6 +49,7 @@ const Dashboard = () => {
               title="Alumni Requests"
               description="Track and process alumni requests."
               count={0}
+              onNewRequest={handleNewAlumniRequest}
             />
           </div>
 
@@ -55,7 +61,10 @@ const Dashboard = () => {
             <AlumniTypesContent />
           </CollapsibleInfo>
 
-          <SubmissionProcess />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <SubmissionProcess />
+            <AlumniSubmissionProcess />
+          </div>
         </>
       )}
     </DashboardLayout>
