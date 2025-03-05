@@ -1,5 +1,5 @@
 
-import { Clock, FileText, CheckCircle2 } from "lucide-react";
+import { Clock, FileText, CheckCircle2, Upload } from "lucide-react";
 
 interface Step4ReviewProps {
   supportType: string | null;
@@ -32,7 +32,12 @@ const Step4Review = ({ supportType }: Step4ReviewProps) => {
           
           <div>
             <p className="text-sm text-gray-500">Supporting Documents</p>
-            <p className="font-medium">None attached</p>
+            <div className="flex items-center gap-2 mt-1">
+              <div className="bg-evolve-100 p-1.5 rounded">
+                <Upload size={16} className="text-evolve-600" />
+              </div>
+              <span className="font-medium">2 files uploaded</span>
+            </div>
           </div>
         </div>
       </div>
