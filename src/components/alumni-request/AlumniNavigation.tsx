@@ -1,6 +1,5 @@
 
-import { Button } from "@/components/ui/button";
-import { ChevronRight } from "lucide-react";
+import RequestNavigation from "@/components/common/RequestNavigation";
 
 interface AlumniNavigationProps {
   currentStep: number;
@@ -9,36 +8,19 @@ interface AlumniNavigationProps {
   handleSubmit: () => void;
 }
 
-const AlumniNavigation = ({ currentStep, handlePrevious, handleNext, handleSubmit }: AlumniNavigationProps) => {
-  if (currentStep >= 5) return null;
-  
+const AlumniNavigation = ({ 
+  currentStep, 
+  handlePrevious, 
+  handleNext, 
+  handleSubmit 
+}: AlumniNavigationProps) => {
   return (
-    <div className="flex justify-between mt-8">
-      <Button
-        variant="outline"
-        onClick={handlePrevious}
-        disabled={currentStep === 1}
-      >
-        Previous
-      </Button>
-      
-      {currentStep < 4 ? (
-        <Button
-          className="bg-evolve-600 hover:bg-evolve-700 transition-all-smooth"
-          onClick={handleNext}
-        >
-          Next Step
-          <ChevronRight size={16} />
-        </Button>
-      ) : (
-        <Button
-          className="bg-evolve-600 hover:bg-evolve-700 transition-all-smooth"
-          onClick={handleSubmit}
-        >
-          Submit Request
-        </Button>
-      )}
-    </div>
+    <RequestNavigation
+      currentStep={currentStep}
+      handlePrevious={handlePrevious}
+      handleNext={handleNext}
+      handleSubmit={handleSubmit}
+    />
   );
 };
 

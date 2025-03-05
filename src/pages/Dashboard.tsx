@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
@@ -6,8 +5,7 @@ import RequestSummary from "@/components/dashboard/RequestSummary";
 import CollapsibleInfo from "@/components/dashboard/CollapsibleInfo";
 import BarrierTypesContent from "@/components/dashboard/BarrierTypes";
 import AlumniTypesContent from "@/components/dashboard/AlumniTypes";
-import SubmissionProcess from "@/components/dashboard/SubmissionProcess";
-import AlumniSubmissionProcess from "@/components/dashboard/AlumniSubmissionProcess";
+import RequestSubmissionProcess from "@/components/dashboard/RequestSubmissionProcess";
 import LoadingState from "@/components/dashboard/LoadingState";
 import RecentNotifications from "@/components/dashboard/RecentNotifications";
 
@@ -65,8 +63,8 @@ const Dashboard = () => {
           </CollapsibleInfo>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <SubmissionProcess />
-            <AlumniSubmissionProcess />
+            <RequestSubmissionProcess type="barrier" />
+            <RequestSubmissionProcess type="alumni" />
           </div>
         </>
       )}
