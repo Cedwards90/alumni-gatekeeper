@@ -7,9 +7,12 @@ import AlumniTypesContent from "@/components/dashboard/AlumniTypes";
 import RequestSubmissionProcess from "@/components/dashboard/RequestSubmissionProcess";
 import LoadingState from "@/components/dashboard/LoadingState";
 import RecentNotifications from "@/components/dashboard/RecentNotifications";
+import ReferralCodeManager from "@/components/admin/ReferralCodeManager";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
+  // In a real app, this would be determined by the user's role from authentication
+  const [isAdmin, setIsAdmin] = useState(true);
 
   useEffect(() => {
     // Simulate loading data
@@ -32,6 +35,12 @@ const Dashboard = () => {
             <RequestSubmissionProcess type="barrier" count={0} />
             <RequestSubmissionProcess type="alumni" count={0} />
           </div>
+
+          {isAdmin && (
+            <div className="mb-8">
+              <ReferralCodeManager />
+            </div>
+          )}
 
           <CollapsibleInfo title="What Qualifies as a Barrier Request?">
             <BarrierTypesContent />
