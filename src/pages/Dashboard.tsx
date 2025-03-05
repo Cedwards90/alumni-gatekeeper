@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -15,13 +14,18 @@ import {
   ChevronDown,
   ChevronUp,
   FileText,
-  PlusCircle
+  PlusCircle,
+  TrendingUp,
+  CheckSquare,
+  Shirt,
+  HeartPulse
 } from "lucide-react";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [showBarrierInfo, setShowBarrierInfo] = useState(false);
+  const [showAlumniInfo, setShowAlumniInfo] = useState(false);
 
   useEffect(() => {
     // Simulate loading data
@@ -84,6 +88,33 @@ const Dashboard = () => {
       title: "Health & Wellness Support",
       description: "Mental health services, stress management, or medical assistance needed to stay engaged in training.",
       icon: <Heart className="text-evolve-600" />
+    }
+  ];
+
+  const alumniTypes = [
+    {
+      id: 1,
+      title: "Employment Stability Assistance",
+      description: "Job transition support and employer connections for new opportunities.",
+      icon: <TrendingUp className="text-evolve-600" />
+    },
+    {
+      id: 2,
+      title: "Professional Development Assistance",
+      description: "Resume building, interview coaching, and entrepreneurial support for career mobility.",
+      icon: <CheckSquare className="text-evolve-600" />
+    },
+    {
+      id: 3,
+      title: "Work Readiness Attire & Tools",
+      description: "Assistance with required tools, safety gear, equipment, and work attire for employment.",
+      icon: <Shirt className="text-evolve-600" />
+    },
+    {
+      id: 4,
+      title: "Health & Wellness Resources",
+      description: "Mental health counseling, stress management resources, and access to wellness programs.",
+      icon: <HeartPulse className="text-evolve-600" />
     }
   ];
 
@@ -208,6 +239,61 @@ const Dashboard = () => {
                     <p className="text-sm text-muted-foreground">
                       By addressing immediate challenges that could prevent trainees from completing their programs, 
                       Evolve Foundation ensures that participants have the support they need to succeed and transition into career opportunities.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="bg-white rounded-lg shadow-sm p-6 border border-gray-100 mb-8">
+              <div 
+                className="flex justify-between items-center cursor-pointer" 
+                onClick={() => setShowAlumniInfo(!showAlumniInfo)}
+              >
+                <h3 className="text-lg font-medium">What Qualifies as an Alumni Request?</h3>
+                <div className="text-gray-500">
+                  {showAlumniInfo ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                </div>
+              </div>
+              
+              {showAlumniInfo && (
+                <div className="mt-4">
+                  <p className="mb-4">
+                    An Alumni Request is support for graduates to sustain and grow their careers after completing an Evolve Foundation training program.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    {alumniTypes.map((type) => (
+                      <div key={type.id} className="bg-gray-50 p-4 rounded-lg flex">
+                        <div className="mr-3 mt-1">{type.icon}</div>
+                        <div>
+                          <h4 className="font-medium text-sm">{type.title}</h4>
+                          <p className="text-sm text-muted-foreground">{type.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                    <div className="flex items-start">
+                      <HelpCircle className="text-amber-500 mt-0.5 mr-2 shrink-0" size={18} />
+                      <div>
+                        <h4 className="font-medium text-sm mb-2">What Alumni Requests Do NOT Cover:</h4>
+                        <ul className="list-disc list-inside text-sm text-muted-foreground space-y-1">
+                          <li>Ongoing financial support unrelated to career development</li>
+                          <li>Non-employment-related personal expenses</li>
+                          <li>Training-related requests (these fall under Barrier Requests)</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h4 className="font-medium text-sm mb-2">Why Alumni Requests Matter</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Evolve Foundation is committed to ensuring that graduates not only secure employment but also sustain and grow their careers. 
+                      Alumni Requests provide the long-term support necessary to help individuals advance, overcome challenges, 
+                      and remain engaged in the clean energy workforce.
                     </p>
                   </div>
                 </div>
