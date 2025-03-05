@@ -1,7 +1,6 @@
+
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
-import RequestSummary from "@/components/dashboard/RequestSummary";
 import CollapsibleInfo from "@/components/dashboard/CollapsibleInfo";
 import BarrierTypesContent from "@/components/dashboard/BarrierTypes";
 import AlumniTypesContent from "@/components/dashboard/AlumniTypes";
@@ -10,7 +9,6 @@ import LoadingState from "@/components/dashboard/LoadingState";
 import RecentNotifications from "@/components/dashboard/RecentNotifications";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -22,14 +20,6 @@ const Dashboard = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleNewBarrierRequest = () => {
-    navigate("/barrier-request");
-  };
-
-  const handleNewAlumniRequest = () => {
-    navigate("/alumni-request");
-  };
-
   return (
     <DashboardLayout>
       {isLoading ? (
@@ -39,19 +29,8 @@ const Dashboard = () => {
           <RecentNotifications />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <RequestSummary
-              title="Barrier Requests"
-              description="Manage and track barrier requests."
-              count={0}
-              onNewRequest={handleNewBarrierRequest}
-            />
-
-            <RequestSummary
-              title="Alumni Requests"
-              description="Track and process alumni requests."
-              count={0}
-              onNewRequest={handleNewAlumniRequest}
-            />
+            <RequestSubmissionProcess type="barrier" count={0} />
+            <RequestSubmissionProcess type="alumni" count={0} />
           </div>
 
           <CollapsibleInfo title="What Qualifies as a Barrier Request?">
@@ -61,11 +40,6 @@ const Dashboard = () => {
           <CollapsibleInfo title="What Qualifies as an Alumni Request?">
             <AlumniTypesContent />
           </CollapsibleInfo>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <RequestSubmissionProcess type="barrier" />
-            <RequestSubmissionProcess type="alumni" />
-          </div>
         </>
       )}
     </DashboardLayout>
