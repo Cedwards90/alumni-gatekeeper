@@ -6,6 +6,7 @@ import SignUp from "@/pages/SignUp";
 import ResetPassword from "@/pages/ResetPassword";
 import Dashboard from "@/pages/Dashboard";
 import BarrierRequest from "@/pages/BarrierRequest";
+import AlumniRequest from "@/pages/AlumniRequest";
 import NotFound from "@/pages/NotFound";
 import "./App.css";
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/barrier-request" element={<BarrierRequest />} />
+        <Route path="/alumni-request" element={<AlumniRequest />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster position="top-right" />
