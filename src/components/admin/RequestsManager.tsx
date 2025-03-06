@@ -6,14 +6,25 @@ import RequestCard from "@/components/admin/RequestCard";
 import { Search, SlidersHorizontal } from "lucide-react";
 import { toast } from "sonner";
 
+// Define interface to match RequestCard's Request interface
+interface Request {
+  id: string;
+  type: "barrier" | "alumni";
+  category: string;
+  student: string;
+  date: string;
+  status: "pending" | "approved" | "denied";
+  details: string;
+}
+
 // Mock data - in a real app, these would come from an API
-const mockBarrierRequests = [
+const mockBarrierRequests: Request[] = [
   { id: "br1", type: "barrier", category: "Transportation", student: "John Doe", date: "2023-10-15", status: "pending", details: "Need assistance with transportation to the training center" },
   { id: "br2", type: "barrier", category: "Childcare", student: "Sara Johnson", date: "2023-10-17", status: "pending", details: "Requesting childcare support during evening classes" },
   { id: "br3", type: "barrier", category: "Emergency Fund", student: "Michael Brown", date: "2023-10-10", status: "approved", details: "Emergency financial assistance needed for housing" },
 ];
 
-const mockAlumniRequests = [
+const mockAlumniRequests: Request[] = [
   { id: "ar1", type: "alumni", category: "Career Development", student: "Lisa Wilson", date: "2023-10-12", status: "pending", details: "Seeking career counseling after graduation" },
   { id: "ar2", type: "alumni", category: "Work Readiness", student: "David Martinez", date: "2023-10-09", status: "denied", details: "Request for resume review and interview preparation" },
   { id: "ar3", type: "alumni", category: "Health Services", student: "Jennifer Davis", date: "2023-10-14", status: "approved", details: "Assistance with health insurance enrollment after program completion" },
