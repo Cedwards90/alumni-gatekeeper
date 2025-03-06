@@ -15,7 +15,7 @@ import { Shield } from "lucide-react";
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   // In a real app, this would be determined by the user's role from authentication
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     // Simulate loading data

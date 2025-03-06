@@ -14,7 +14,7 @@ interface DashboardLayoutProps {
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const navigate = useNavigate();
   // In a real app, this would be determined by the user's role from authentication
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const handleSignOut = () => {
     // In a real app, you would call a sign out API here
