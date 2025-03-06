@@ -1,36 +1,36 @@
-
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
+import { Loader2, Shield } from "lucide-react";
 
-const SignInForm = () => {
+const AdminSignInForm = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [adminCode, setAdminCode] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email || !password) {
-      toast.error("Please enter both email and password");
+    if (!email || !password || !adminCode) {
+      toast.error("Please enter email, password, and admin code");
       return;
     }
     
     setIsLoading(true);
     
     try {
-      // Mock authentication success
-      // In a real app, you would call an authentication API here
+      // Mock authentication success with admin role
+      // In a real app, you would validate the admin code and set role permissions
       setTimeout(() => {
-        // Set student role in localStorage
-        localStorage.setItem("userRole", "student");
-        toast.success("Successfully signed in!");
-        navigate("/dashboard");
+        // Set admin status in localStorage for persistence
+        localStorage.setItem("userRole", "admin");
+        toast.success("Successfully signed in as administrator!");
+        navigate("/admin");
       }, 1500);
     } catch (error) {
       toast.error("Failed to sign in. Please check your credentials.");
@@ -42,12 +42,17 @@ const SignInForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 animate-slide-up">
+      <div className="flex items-center justify-center mb-4">
+        <Shield className="h-8 w-8 text-evolve-600" />
+        <span className="ml-2 text-xl font-semibold text-evolve-600">Administrator Access</span>
+      </div>
+      
       <div className="space-y-2">
         <Label htmlFor="email">Email</Label>
         <Input
           id="email"
           type="email"
-          placeholder="you@example.com"
+          placeholder="admin@example.com"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
@@ -56,21 +61,26 @@ const SignInForm = () => {
       </div>
       
       <div className="space-y-2">
-        <div className="flex items-center justify-between">
-          <Label htmlFor="password">Password</Label>
-          <Link 
-            to="/reset-password" 
-            className="text-xs text-evolve-600 hover:text-evolve-800 transition-all-smooth"
-          >
-            Forgot password?
-          </Link>
-        </div>
+        <Label htmlFor="password">Password</Label>
         <Input
           id="password"
           type="password"
           placeholder="••••••••"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+          className="transition-all-smooth"
+        />
+      </div>
+      
+      <div className="space-y-2">
+        <Label htmlFor="adminCode">Admin Access Code</Label>
+        <Input
+          id="adminCode"
+          type="password"
+          placeholder="Enter administrator code"
+          value={adminCode}
+          onChange={(e) => setAdminCode(e.target.value)}
           required
           className="transition-all-smooth"
         />
@@ -84,30 +94,14 @@ const SignInForm = () => {
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" /> 
-            Signing in...
+            Authenticating...
           </>
         ) : (
-          "Sign in"
+          "Sign in as Administrator"
         )}
       </Button>
-      
-      <div className="text-center text-sm">
-        Don't have an account?{" "}
-        <Link 
-          to="/sign-up" 
-          className="text-evolve-600 hover:text-evolve-800 font-medium transition-all-smooth"
-        >
-          Sign up
-        </Link>
-      </div>
-      
-      <div className="text-center text-xs text-muted-foreground mt-4 pt-4 border-t">
-        <Link to="/admin-sign-in" className="text-evolve-600 hover:text-evolve-800 transition-all-smooth">
-          Administrator Access
-        </Link>
-      </div>
     </form>
   );
 };
 
-export default SignInForm;
+export default AdminSignInForm;

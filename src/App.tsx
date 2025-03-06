@@ -5,6 +5,7 @@ import SignIn from "@/pages/SignIn";
 import SignUp from "@/pages/SignUp";
 import ResetPassword from "@/pages/ResetPassword";
 import Dashboard from "@/pages/Dashboard";
+import AdminSignIn from "@/pages/AdminSignIn";
 import AdminDashboard from "@/pages/AdminDashboard";
 import BarrierRequest from "@/pages/BarrierRequest";
 import AlumniRequest from "@/pages/AlumniRequest";
@@ -15,9 +16,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route path="/" element={<Navigate to="/sign-in" replace />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/admin-sign-in" element={<AdminSignIn />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />

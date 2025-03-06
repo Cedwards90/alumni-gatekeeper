@@ -1,11 +1,11 @@
 
-import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import NotificationsBell from "@/components/notifications/NotificationsBell";
 import { NotificationsProvider } from "@/contexts/NotificationsContext";
 import { LayoutDashboard, Shield } from "lucide-react";
+import { useUserRole } from "@/hooks/useUserRole";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -13,11 +13,11 @@ interface DashboardLayoutProps {
 
 const DashboardLayout = ({ children }: DashboardLayoutProps) => {
   const navigate = useNavigate();
-  // In a real app, this would be determined by the user's role from authentication
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { isAdmin, setUserRole } = useUserRole();
 
   const handleSignOut = () => {
-    // In a real app, you would call a sign out API here
+    // Clear user role from localStorage
+    setUserRole(null);
     toast.success("Signed out successfully");
     navigate("/sign-in");
   };

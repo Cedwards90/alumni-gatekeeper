@@ -11,11 +11,11 @@ import RecentNotifications from "@/components/dashboard/RecentNotifications";
 import ReferralCodeManager from "@/components/admin/ReferralCodeManager";
 import { Button } from "@/components/ui/button";
 import { Shield } from "lucide-react";
+import { useUserRole } from "@/hooks/useUserRole";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
-  // In a real app, this would be determined by the user's role from authentication
-  const [isAdmin, setIsAdmin] = useState(false);
+  const { isAdmin } = useUserRole();
 
   useEffect(() => {
     // Simulate loading data
