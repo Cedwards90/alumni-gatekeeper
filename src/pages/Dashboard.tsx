@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
 import CollapsibleInfo from "@/components/dashboard/CollapsibleInfo";
 import BarrierTypesContent from "@/components/dashboard/BarrierTypes";
@@ -8,6 +9,8 @@ import RequestSubmissionProcess from "@/components/dashboard/RequestSubmissionPr
 import LoadingState from "@/components/dashboard/LoadingState";
 import RecentNotifications from "@/components/dashboard/RecentNotifications";
 import ReferralCodeManager from "@/components/admin/ReferralCodeManager";
+import { Button } from "@/components/ui/button";
+import { Shield } from "lucide-react";
 
 const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -38,6 +41,20 @@ const Dashboard = () => {
 
           {isAdmin && (
             <div className="mb-8">
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-5 mb-4">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="text-lg font-medium mb-1">Admin Tools</h3>
+                    <p className="text-muted-foreground">Access the admin dashboard to manage requests and referral codes</p>
+                  </div>
+                  <Button asChild className="bg-evolve-600 hover:bg-evolve-700">
+                    <Link to="/admin" className="flex items-center gap-2">
+                      <Shield size={16} />
+                      Admin Dashboard
+                    </Link>
+                  </Button>
+                </div>
+              </div>
               <ReferralCodeManager />
             </div>
           )}
