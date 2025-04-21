@@ -1,28 +1,43 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+  background: #f8f3d4;
+}
+
 /* Custom animations */
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slide-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @layer utilities {
   .animate-fade-in {
     animation: fade-in 0.3s ease-out;
   }
-  
+
   .animate-slide-up {
     animation: slide-up 0.4s ease-out;
   }
-  
+
   .transition-all-smooth {
     transition: all 0.2s ease-in-out;
   }
@@ -30,17 +45,26 @@
 
 /* Evolve Foundation theme colors */
 :root {
-  --evolve-50: #f0f9ff;
-  --evolve-100: #e0f2fe;
-  --evolve-200: #bae6fd;
-  --evolve-300: #7dd3fc;
-  --evolve-400: #38bdf8;
-  --evolve-500: #0ea5e9;
-  --evolve-600: #0284c7;
-  --evolve-700: #0369a1;
-  --evolve-800: #075985;
-  --evolve-900: #0c4a6e;
-  --evolve-950: #082f49;
+  --evolve-50: #e0f2e0; /* Lightest shade */
+  --evolve-100: #c1e6c1; /* Slightly darker */
+  --evolve-200: #9cd49c; /* Mid-light shade */
+  --evolve-300: #6fb76f; /* Mid shade */
+  --evolve-400: #4ba44b; /* Darker shade */
+  --evolve-500: #2f8f2f; /* Base color */
+  --evolve-600: #2a7f2a; /* Slightly darker */
+  --evolve-700: #246f24; /* Darker still */
+  --evolve-800: #1f5f1f; /* Even darker */
+  --evolve-900: #1a4f1a; /* Near darkest */
+  --evolve-950: #183f27; /* Darkest base color */
+}
+.glass-effect {
+  background: #ffffff99;
+}
+
+.glass-effect button {
+  background-color: var(--evolve-800);
+  color: #fff;
+  text-transform: uppercase;
 }
 
 @layer base {
@@ -48,8 +72,13 @@
   body {
     @apply text-gray-800 antialiased;
   }
-  
-  h1, h2, h3, h4, h5, h6 {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-medium tracking-tight;
   }
 }
