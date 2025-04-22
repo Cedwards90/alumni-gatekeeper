@@ -61,10 +61,11 @@ body {
   background: #ffffff99;
 }
 
-.glass-effect button {
-  background-color: var(--evolve-800);
-  color: #fff;
+button {
   text-transform: uppercase;
+}
+.text-primary-foreground {
+  color: #fff;
 }
 
 @layer base {
