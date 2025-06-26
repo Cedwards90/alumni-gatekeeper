@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import NotificationsBell from "@/components/notifications/NotificationsBell";
 import { NotificationsProvider } from "@/contexts/NotificationsContext";
-import { LayoutDashboard, Shield, UserPlus, FileText, GraduationCap } from "lucide-react";
+import { LayoutDashboard, Shield } from "lucide-react";
 import { useUserRole } from "@/hooks/useUserRole";
 import { cn } from "@/lib/utils";
 
@@ -29,18 +29,6 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       name: "Dashboard",
       href: "/dashboard",
       icon: LayoutDashboard,
-      adminOnly: false,
-    },
-    {
-      name: "Barrier Request",
-      href: "/barrier-request",
-      icon: FileText,
-      adminOnly: false,
-    },
-    {
-      name: "Alumni Request",
-      href: "/alumni-request",
-      icon: GraduationCap,
       adminOnly: false,
     },
     ...(isAdmin ? [{
