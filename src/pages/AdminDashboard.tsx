@@ -22,9 +22,9 @@ const AdminDashboard = () => {
         <LoadingState />
       ) : (
         <div className="space-y-6">
-          <div>
-            <h2 className="text-2xl font-semibold mb-2">Admin Dashboard</h2>
-            <p className="text-muted-foreground">Manage and track requests, approve or deny applications, and handle referral codes.</p>
+          <div className="hero-gradient rounded-xl text-white p-6 shadow-sm">
+            <h2 className="text-2xl font-playfair">Welcome, Admin!</h2>
+            <p className="text-white/90">Manage and track requests, approve or deny applications.</p>
           </div>
           
           <AdminTabs />

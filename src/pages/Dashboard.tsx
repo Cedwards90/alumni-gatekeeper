@@ -32,6 +32,12 @@ const Dashboard = () => {
         <LoadingState />
       ) : (
         <>
+          {/* Welcome Banner */}
+          <div className="hero-gradient rounded-xl text-white p-6 mb-6 shadow-sm">
+            <h2 className="text-2xl font-playfair">Welcome back!</h2>
+            <p className="text-white/90">Submit new requests, track progress, and view recent updates.</p>
+          </div>
+
           <RecentNotifications />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -45,7 +51,7 @@ const Dashboard = () => {
                 <div className="flex justify-between items-center">
                   <div>
                     <h3 className="text-lg font-medium mb-1">Admin Tools</h3>
-                    <p className="text-muted-foreground">Access the admin dashboard to manage requests and referral codes</p>
+                    <p className="text-muted-foreground">Access the admin dashboard to manage requests</p>
                   </div>
                   <Button asChild className="bg-evolve-600 hover:bg-evolve-700">
                     <Link to="/admin" className="flex items-center gap-2">

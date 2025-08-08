@@ -71,6 +71,9 @@ export default {
           950: "#183f27",
         },
       },
+      fontFamily: {
+        playfair: ["Playfair Display", "serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
